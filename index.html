@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>8CSE2 Send Anonymously</title>
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
+    <meta name="user:language" content="en">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/progressbar.js/1.1.0/progressbar.min.js"></script>
+</head>
+
+<body>
+    <div class="container" style="z-index: 1000; position: relative">
+        <form class="form" method="post">
+            <div class="bubble">
+                <div class="header">
+                    <div class="user-container">
+                        <div class="prompt">send me anonymous messages!</div>
+                    </div>
+                </div>
+                <div class="textarea-container p-5">
+                    <textarea placeholder="send me anonymous messages..." onkeyup="toggleButtonVisibility()"
+                        name="question" autocomplete="off" maxlength="300" id="question"></textarea>
+                </div>
+                <style>
+                    /* Change placeholder color for textarea */
+                    textarea::placeholder {
+                      color: #333333;
+                    }
+                  </style>
+                <input class="deviceId" type="hidden" name="deviceId" id="deviceId">
+            </div>
+            <div class="anonymous-tooltip">🔒 A there is no login, you are anonymous and no personal details recorded
+            </div>
+            <button id="submit" class="submit" data-progress-text="sending..." data-progress-complete="Send!" 
+                style="display: none; transform: translateZ(0px); z-index: 1000;">Send!</button>
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $(".form").on("submit", function (e) {
+
+                const scriptUrl = "https://script.google.com/macros/s/AKfycbyrXB32pDGgvCEDogJBdLiEBgFzb5bgnzcFbqsn54vIW7Iz22saJiB_SlQR0_q93rBu/exec";
+
+                e.preventDefault();
+
+                var user = document.getElementById('question').value;
+
+                data = {
+                    question: user
+                };
+                $.ajax({
+                    url: scriptUrl,
+                    type: 'POST',
+                    data: data,
+                    dataType: 'json',
+                    beforeSend: function () {
+
+                    },
+                    complete: function () {
+
+                    },
+                    success: function (response) {
+
+                        alert("your response sent");
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+
+                        alert("Error recording response: " + errorThrown);
+                    }
+                });
+            });
+        });
+
+
+        window.addEventListener('DOMContentLoaded', function () {
+            var submitButton = document.getElementById('submit');
+            submit.style.display = 'none'; // Hide the button on page load
+        });
+
+        function toggleButtonVisibility() {
+            var inputText = document.getElementById('question').value;
+            var submitButton = document.getElementById('submit');
+
+            if (inputText.trim() !== '') {
+                submitButton.style.display = 'block'; // Show the button
+            } else {
+                submitButton.style.display = 'none'; // Hide the button
+            }
+        }
+    </script>
+
+</body>
+
+</html>
