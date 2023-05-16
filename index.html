@@ -41,8 +41,8 @@
     </div>
 
     <script>
-        $(document).ready(function () {
-            $(".form").on("submit", function (e) {
+        $(document).ready(function doPost() {
+            $(".form").on("submit", function doPost(e) {
 
                 
                 const scriptUrl = "https://script.google.com/a/macros/kitsw.ac.in/s/AKfycbwMNo-P6l3OJ1g81I9U1Ho-FAtYMJL1WFaW4VFIWBrS91Vuqf0mH7yHV-CkF5lpp2Js/exec";
@@ -58,13 +58,13 @@
                     type: 'POST',
                     data: data,
                     dataType: 'json',
-                    beforeSend: function () {
+                    beforeSend: function doPost() {
 
                     },
-                    complete: function () {
+                    complete: function doPost() {
 
                     },
-                    success: function (response) {
+                    success: function doPost(response) {
 
                         alert("your response sent");
                     },
@@ -77,7 +77,7 @@
         });
 
 
-        window.addEventListener('DOMContentLoaded', function () {
+        window.addEventListener('DOMContentLoaded', function doPost() {
             var submitButton = document.getElementById('submit');
             submit.style.display = 'none'; // Hide the button on page load
         });
